@@ -11,7 +11,7 @@ import java.util.List;
  * describe:
  *
  * @author Feiyu
- * @date 2019/03/04
+ * @date 2019/06/13
  */
 @Service
 public class CategoryService {
@@ -20,8 +20,6 @@ public class CategoryService {
     private CategoryMapper categoryMapper;
 
     public List<Category> queryListByParent(Long pid) {
-        Category category = new Category();
-        category.setParentId(pid);
-        return this.categoryMapper.select(category);
+        return this.categoryMapper.selectAllCategory(pid);
     }
 }

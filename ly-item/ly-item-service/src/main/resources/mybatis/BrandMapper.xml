@@ -2,44 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.leyou.item.mapper.BrandMapper">
-    <resultMap id="Brand" type="com.leyou.item.model.Brand">
-        <id column="id" property="id"/>
+    <resultMap id="Brand" type="com.leyou.item.pojo.Brand">
+        <result column="id" property="id"/>
         <result column="name" property="name"/>
-        <result property="image" column="image"/>
-        <result property="letter" column="letter"/>
+        <result column="image" property="image"/>
+        <result column="letter" property="letter"/>
     </resultMap>
-    <select id="selectByExample" resultMap="Brand">
-        SELECT * FROM tb_brand
-        <where>
-        <if test="key != null">
-            AND name like '%'||#{key}||'%'
-        </if>
-        </where>
-        order by #{sortBy}
-                 #{order}
-        LIMIT #{page}, #{rows}
+
+    <select id="filterItems" resultMap="Brand" parameterType="list">
+        <![CDATA[
+            select b.id id,
+               b.name name,
+               b.image image,
+               b.letter letter
+               from tb_brand b
+               where letter like %#{key}%
+               limit #{page} , #{rows}
+
+                <if test="sortBy != null">
+                order by #{sortBy}
+                 <choose>
+                 <when test='desc=="true"'>
+                    asc
+                 </when>
+                 <otherwise>
+                    ${desc}
+                 </otherwise>
+                 </choose>
+        ]]>
     </select>
-
-    <insert id="insertSelective" parameterType="com.leyou.item.model.Brand">
-        insert into tb_brand(
-        id,
-        name,
-        image,
-        letter
-        )values (
-          #{id},
-          #{name},
-          #{image},
-          #{letter}
-        )
-    </insert>
-
-    <insert id="insertCategoryBrand">
-        insert into tb_category_brand
-        (category_id,
-         brand_id)
-        VALUES (
-        #{cid},
-        #{bid})
-    </insert>
 </mapper>

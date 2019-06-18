@@ -1,14 +1,15 @@
 package com.leyou.item.pojo;
 
-
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * describe:
  *
  * @author Feiyu
- * @date 2019/03/04
+ * @date 2019/06/16
  */
 @Table(name = "tb_brand")
 public class Brand {
@@ -18,8 +19,15 @@ public class Brand {
     private String name;// 品牌名称
     private String image;// 品牌图片
     private Character letter;
-    @Transient
-    private List<Long> categories;
+
+    public Brand() {
+    }
+
+    public Brand(String name, String image, Character letter) {
+        this.name = name;
+        this.image = image;
+        this.letter = letter;
+    }
 
     public Long getId() {
         return id;
@@ -53,11 +61,13 @@ public class Brand {
         this.letter = letter;
     }
 
-    public List<Long> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<Long> categories) {
-        this.categories = categories;
+    @Override
+    public String toString() {
+        return "Brand{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", image='" + image + '\'' +
+                ", letter=" + letter +
+                '}';
     }
 }

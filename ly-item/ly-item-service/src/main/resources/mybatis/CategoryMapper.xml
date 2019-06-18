@@ -2,14 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.leyou.item.mapper.CategoryMapper">
-    <resultMap id="Category" type="com.leyou.item.model.Category">
-        <id column="id" property="id"/>
+    <resultMap id="Category" type="com.leyou.item.pojo.Category">
+        <result column="id" property="id"/>
         <result column="name" property="name"/>
-        <result column="parentId" property="parentId"/>
-        <result column="isParent" property="isParent"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="is_parent" property="isParent"/>
         <result column="sort" property="sort"/>
     </resultMap>
-    <select id="select" resultMap="Category">
-        SELECT * FROM tb_category
+
+    <select id="selectAllCategory" parameterType="long" resultMap="Category">
+        <![CDATA[
+            select c.id id,
+                   c.name name,
+                   c.parent_id parent_id,
+                   c.is_parent is_Parent,
+                   c.sort sort
+                   from tb_category c
+                   where parent_id = #{pid}
+        ]]>
     </select>
 </mapper>

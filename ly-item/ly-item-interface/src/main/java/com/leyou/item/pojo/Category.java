@@ -9,7 +9,7 @@ import javax.persistence.Table;
  * describe:
  *
  * @author Feiyu
- * @date 2019/03/04
+ * @date 2019/06/13
  */
 @Table(name="tb_category")
 public class Category {
@@ -20,6 +20,16 @@ public class Category {
     private Long parentId;
     private Boolean isParent;
     private Integer sort;
+
+    public Category() {
+    }
+
+    public Category(String name, Long parentId, Boolean isParent, Integer sort) {
+        this.name = name;
+        this.parentId = parentId;
+        this.isParent = isParent;
+        this.sort = sort;
+    }
 
     public Long getId() {
         return id;
@@ -45,12 +55,12 @@ public class Category {
         this.parentId = parentId;
     }
 
-    public Boolean getParent() {
+    public Boolean getIsParent() {
         return isParent;
     }
 
-    public void setParent(Boolean isparent) {
-        this.isParent = isparent;
+    public void setIsParent(Boolean parent) {
+        isParent = parent;
     }
 
     public Integer getSort() {
@@ -59,16 +69,5 @@ public class Category {
 
     public void setSort(Integer sort) {
         this.sort = sort;
-    }
-
-    @Override
-    public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", parentId=" + parentId +
-                ", isParent=" + isParent +
-                ", sort=" + sort +
-                '}';
     }
 }

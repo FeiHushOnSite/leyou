@@ -10,10 +10,13 @@ import org.springframework.lang.Nullable;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-
-
+/**
+ * describe:
+ *
+ * @author Feiyu
+ * @date 2019/06/13
+ */
 public class JsonUtils {
-
     public static final ObjectMapper mapper = new ObjectMapper();
 
     private static final Logger logger = LoggerFactory.getLogger(JsonUtils.class);
@@ -74,4 +77,3 @@ public class JsonUtils {
         }
     }
 }
-

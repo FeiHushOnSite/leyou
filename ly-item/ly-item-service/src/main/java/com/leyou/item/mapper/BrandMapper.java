@@ -9,18 +9,10 @@ import java.util.List;
  * describe:
  *
  * @author xxx
- * @date 2019/03/04
+ * @date 2019/06/16
  */
 @Mapper
 public interface BrandMapper {
+    List<Brand> filterItems(String key,Integer page, Integer rows,String sortBy, Boolean desc);
 
-    List<Brand> selectByExample(Integer page,
-                                Integer rows,
-                                String sortBy,
-                                String order,
-                                String key);
-
-    void insertSelective(Brand brand);
-
-    void insertCategoryBrand(Long cid, Long id);
 }
